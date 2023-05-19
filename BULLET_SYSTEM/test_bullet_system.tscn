@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://IMAGES/INKSCAPE/ITEM_HOLDER_PLACE_HOLDER.png" type="Texture" id=1]
+[ext_resource path="res://SCENES/BULLET_HELL_SYS.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("BULLET_HELL_SYS:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 360, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "rotate"
+length = 1.2
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("BULLET_HELL_SYS:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+
+[node name="test_bullet_system" type="Node2D"]
+position = Vector2( 578, 286 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.114462, 0.114462 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="BULLET_HELL_SYS" parent="Sprite" instance=ExtResource( 2 )]
+rotation = 6.28319
+__meta__ = {
+"_edit_group_": true
+}
+bullet_path = "res://SCENES/BULLET.tscn"
+
+[node name="1" type="Position2D" parent="Sprite/BULLET_HELL_SYS"]
+position = Vector2( -49.2719, -238.392 )
+
+[node name="2" type="Position2D" parent="Sprite/BULLET_HELL_SYS"]
+position = Vector2( 237.776, -34.3041 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+autoplay = "rotate"
+anims/RESET = SubResource( 2 )
+anims/rotate = SubResource( 1 )
